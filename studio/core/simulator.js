@@ -118,6 +118,7 @@ export class Simulator {
     this.fault = null;
     this.executor = new TrajectoryExecutor(n);
     this.jog = null;
+    this.servo = null;
     this.hold = { q: this.q.slice(), qd: new Array(n).fill(0), qdd: new Array(n).fill(0) };
     this.des = this.hold;
     this.push = null;
@@ -190,6 +191,7 @@ export class Simulator {
   holdHere() {
     this.executor.clear();
     this.jog = null;
+    this.servo = null;
     this.hold = { q: this.q.slice(), qd: new Array(this.n).fill(0), qdd: new Array(this.n).fill(0) };
     this.des = this.hold;
     this.controller.reset();
@@ -217,6 +219,7 @@ export class Simulator {
     if (!this.enabled) throw new Error('Robot hors puissance (activez les moteurs)');
     if (this.fault) throw new Error(`Défaut actif : ${this.fault}`);
     this.jog = null;
+    this.servo = null;
     let blend = 0;
     const items = this.executor.items;
     if (zone > 0 && items.length) blend = blendTimeForZone(this.kin, items[items.length - 1].seg, zone);
@@ -266,14 +269,51 @@ export class Simulator {
     const d = this.des;
     this.executor.clear();
     this.jog = null;
+    this.servo = null;
     const seg = new BrakeSegment(d.q, d.qd, this.params.limits.joints);
     this.executor.push(seg, 0, this.t);
   }
 
   /** Jog continu : vitesse articulaire (i, signe) ou cartésienne (axe 0..5, repère). */
-  startJog(spec) {
-    if (!this.enabled) return;
+  /**
+   * Suivi « servo » d’une cible articulaire (curseurs, gizmo 3D) : la consigne rejoint la cible
+   * avec les limites de vitesse et d’accélération de chaque axe (freinage optimal).
+   */
+  servoTo(q) {
+    if (!this.enabled || this.fault) return false;
     if (this.executor.busy) this.executor.clear();
+    this.jog = null;
+    const target = this.kin.clampToLimits(q);
+    if (!this.servo) this.servo = { vel: this.hold.qd ? this.hold.qd.slice() : new Array(this.n).fill(0) };
+    this.servo.target = target;
+    return true;
+  }
+
+  servoStep(dt) {
+    const sv = this.servo, lim = this.params.limits.joints;
+    const ovr = Math.max(0.05, this.params.trajectory.speedOverride);
+    let moving = false;
+    for (let i = 0; i < this.n; i++) {
+      const e = sv.target[i] - this.hold.q[i];
+      const vmax = lim[i].vmax * ovr, amax = lim[i].amax * 0.8;
+      const vStar = Math.sign(e) * Math.min(vmax, Math.sqrt(2 * amax * Math.abs(e)));
+      const dv = Math.max(-amax * dt, Math.min(amax * dt, vStar - sv.vel[i]));
+      sv.vel[i] += dv;
+      let step = sv.vel[i] * dt;
+      if (Math.abs(step) > Math.abs(e) && Math.sign(step) === Math.sign(e)) { step = e; sv.vel[i] = 0; }
+      this.hold.q[i] += step;
+      this.hold.qd[i] = sv.vel[i];
+      if (Math.abs(e) > 1e-6 || Math.abs(sv.vel[i]) > 1e-5) moving = true;
+    }
+    if (!moving) this.servo = null;
+    this.des = this.hold;
+    return this.hold;
+  }
+
+  startJog(spec) {
+    if (!this.enabled || this.fault) return;
+    if (this.executor.busy) this.executor.clear();
+    this.servo = null;
     this.jog = { ...spec, vel: new Array(this.n).fill(0) };
     this.hold = { q: this.des.q.slice(), qd: new Array(this.n).fill(0), qdd: new Array(this.n).fill(0) };
   }
@@ -300,6 +340,7 @@ export class Simulator {
       }
     }
     if (this.jog) return this.jogStep(dt);
+    if (this.servo) return this.servoStep(dt);
     this.des = this.hold;
     return this.hold;
   }
