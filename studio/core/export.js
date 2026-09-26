@@ -198,7 +198,7 @@ export function toMJCF(params) {
 }
 
 /** En-tête C++ pour le firmware Teensy (firmware/orion_fw/src/orion_config.h). */
-export function toFirmwareConfig(params) {
+export function toFirmwareConfig(params, { stamp = true } = {}) {
   const n = params.kinematics.joints.length;
   const a = params.actuators.joints;
   const lim = params.limits.joints;
@@ -211,7 +211,7 @@ export function toFirmwareConfig(params) {
   const homingOrder = [...Array(n).keys()].sort((x, y) => hw.homing[x].order - hw.homing[y].order);
   const L = [];
   L.push('// FICHIER GÉNÉRÉ par ORION Studio (Exporter → Configuration firmware).');
-  L.push(`// Robot : ${params.meta.name} — ${new Date().toISOString().slice(0, 10)}`);
+  L.push(`// Robot : ${params.meta.name}${stamp ? ` — ${new Date().toISOString().slice(0, 10)}` : ''}`);
   L.push('// Toutes les valeurs angulaires sont en DEGRÉS côté articulation (sortie de réducteur).');
   L.push('#pragma once');
   L.push('#include <stdint.h>');
@@ -258,6 +258,14 @@ export function toFirmwareConfig(params) {
   L.push(`constexpr float MIT_KDMAX[ORION_NUM_AXES] = ${arr((i) => a[i].kdMax, 3)};`);
   L.push(`constexpr float MIT_KP[ORION_NUM_AXES] = ${arr((i) => params.control.joints[i].mitKp, 3)};`);
   L.push(`constexpr float MIT_KD[ORION_NUM_AXES] = ${arr((i) => params.control.joints[i].mitKd, 4)};`);
+  L.push(`constexpr float MIT_KD_DAMP[ORION_NUM_AXES] = ${arr((i) => Math.min(a[i].kdMax, Math.max(2 * params.control.joints[i].mitKd, 1)), 4)};`);
+  L.push(`constexpr int8_t MIT_DIR[ORION_NUM_AXES] = ${arrI((i) => (hw.pins[i].invertDir ? -1 : 1))};`);
+  L.push(`constexpr float TAU_MAX[ORION_NUM_AXES] = ${arr((i) => (a[i].peakTorque || a[i].tMax || 1) * (params.control.joints[i].torqueLimit ?? 1), 3)};  // N·m`);
+  L.push(`constexpr float REF_POSE_DEG[ORION_NUM_AXES] = ${arr((i) => (params.poses.rest?.[i] || 0) * R, 3)};  // pose de référence (ZERO)`);
+  L.push(`constexpr uint16_t MIT_CTRL_HZ = ${Math.round(hw.mitCtrlHz || 400)};`);
+  L.push(`constexpr uint16_t MIT_FB_TIMEOUT_MS = ${Math.round((hw.feedbackTimeout ?? 0.05) * 1000)};`);
+  L.push(`constexpr uint8_t MIT_MAX_TEMP_C = ${Math.round(hw.maxMotorTemp ?? 85)};`);
+  L.push(`constexpr uint16_t STREAM_DELAY_MS = ${Math.round((hw.streamDelay ?? 0.04) * 1000)};`);
   L.push('}  // namespace orion_cfg');
   return L.join('\n') + '\n';
 }
@@ -272,6 +280,23 @@ export function toFirmwareSetCommands(params) {
   const R = 180 / Math.PI;
   const a = params.actuators.joints, lim = params.limits.joints, hw = params.hardware;
   const out = [];
+  if (hw.controller === 'mit_can_bridge') {
+    // Pont CAN mode MIT (firmware/mit_bridge) : gains, butées, couples, plages d’encodage
+    const c = params.control.joints;
+    a.forEach((ac, i) => {
+      const j = i + 1;
+      out.push(`SET can_id ${j} ${ac.canId}`, `SET dir ${j} ${hw.pins[i].invertDir ? -1 : 1}`);
+      out.push(`SET p_max ${j} ${ac.pMax}`, `SET v_max ${j} ${ac.vMax}`, `SET t_max ${j} ${ac.tMax}`, `SET kp_max ${j} ${ac.kpMax}`, `SET kd_max ${j} ${ac.kdMax}`);
+      out.push(`SET kp ${j} ${+c[i].mitKp.toFixed(4)}`, `SET kd ${j} ${+c[i].mitKd.toFixed(4)}`);
+      out.push(`SET kd_damp ${j} ${+Math.min(ac.kdMax, Math.max(2 * c[i].mitKd, 1)).toFixed(4)}`);
+      out.push(`SET min ${j} ${(lim[i].min * R).toFixed(3)}`, `SET max ${j} ${(lim[i].max * R).toFixed(3)}`, `SET vmax ${j} ${(lim[i].vmax * R).toFixed(3)}`);
+      out.push(`SET tau_max ${j} ${((ac.peakTorque || ac.tMax) * (c[i].torqueLimit ?? 1)).toFixed(3)}`);
+      out.push(`SET ref_pose ${j} ${((params.poses.rest?.[i] || 0) * R).toFixed(3)}`);
+    });
+    out.push(`SET watchdog * ${params.safety.watchdogMs}`, `SET stream_delay * ${Math.round((hw.streamDelay ?? 0.04) * 1000)}`);
+    out.push(`SET ctrl_hz * ${Math.round(hw.mitCtrlHz || 400)}`, `SET fb_timeout * ${Math.round((hw.feedbackTimeout ?? 0.05) * 1000)}`, `SET max_temp * ${Math.round(hw.maxMotorTemp ?? 85)}`);
+    return out;
+  }
   a.forEach((ac, i) => {
     const spd = ac.type === 'stepper' ? ((360 / (ac.stepAngle * R)) * ac.microsteps * ac.gearRatio) / 360 : 0;
     out.push(`SET steps_per_deg ${i + 1} ${spd.toFixed(5)}`);
@@ -283,8 +308,14 @@ export function toFirmwareSetCommands(params) {
     out.push(`SET home_dir ${i + 1} ${hw.homing[i].direction < 0 ? -1 : 1}`);
     out.push(`SET home_pos ${i + 1} ${(hw.homing[i].switchPosition * R).toFixed(3)}`);
     out.push(`SET home_speed ${i + 1} ${(hw.homing[i].speed * R).toFixed(3)}`);
+    out.push(`SET home_slow ${i + 1} ${(hw.homing[i].slowSpeed * R).toFixed(3)}`);
+    out.push(`SET home_backoff ${i + 1} ${(hw.homing[i].backoff * R).toFixed(3)}`);
+    out.push(`SET home_en ${i + 1} ${hw.homing[i].enabled ? 1 : 0}`);
+    out.push(`SET home_pose ${i + 1} ${((params.poses.home[i] || 0) * R).toFixed(3)}`);
   });
   out.push(`SET watchdog * ${params.safety.watchdogMs}`);
+  out.push(`SET stream_delay * ${Math.round((hw.streamDelay ?? 0.04) * 1000)}`);
+  out.push(`SET grip_closed * ${params.gripper.servoMinUs}`, `SET grip_open * ${params.gripper.servoMaxUs}`);
   return out;
 }
 

@@ -13,7 +13,9 @@
     "build:docs": "node tools/gen-docs.mjs",
     "build:app": "node tools/build-app.mjs",
     "build:firmware-config": "node tools/gen-firmware-config.mjs",
-    "build": "npm run vendor && npm run build:cad && npm run build:docs && npm run build:firmware-config && npm run build:app"
+    "build": "npm run vendor && npm run build:cad && npm run build:docs && npm run build:firmware-config && npm run build:app",
+    "test:firmware": "make -C firmware/test",
+    "build:firmware": "bash tools/build-teensy.sh"
   },
   "devDependencies": {
     "esbuild": "^0.28.2",

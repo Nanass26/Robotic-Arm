@@ -182,7 +182,11 @@ export function makeOrion6Maker() {
       dirSetup: 6e-6,
       enableActiveLow: true,
       streamHz: 200,
+      streamDelay: 0.04,
       canBitrate: 1000000,
+      mitCtrlHz: 400,
+      feedbackTimeout: 0.05,
+      maxMotorTemp: 85,
       pins: [
         { step: 2, dir: 3, limit: 24, invertDir: false, limitActiveLow: true },
         { step: 4, dir: 5, limit: 25, invertDir: false, limitActiveLow: true },

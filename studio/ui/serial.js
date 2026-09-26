@@ -2,7 +2,7 @@
 // Protocole ORION-ASCII (voir core/protocol.js et docs/11-firmware-protocole.md).
 
 import { h, btn, toast } from './dom.js';
-import { encodeCommand, parseLine, streamSetpoint, packMitCommand, hex, MIT_FRAMES } from '../core/protocol.js';
+import { encodeCommand, parseLine, streamSetpoint, mitSetpoint, packMitCommand, hex, MIT_FRAMES } from '../core/protocol.js';
 import { toFirmwareSetCommands } from '../core/export.js';
 
 const R2D = 180 / Math.PI;
@@ -39,6 +39,7 @@ export class RobotLink {
     this.writer = enc.writable.getWriter();
     this.readLoop();
     this.app.log('Port série ouvert', 'ok');
+    this.lastGrip = null;
     this.send(encodeCommand('PING', [], true));
     this.send(encodeCommand('STREAM', [50], true));
     this.emit();
@@ -82,7 +83,7 @@ export class RobotLink {
   send(line) {
     if (!this.connected || !this.writer) return false;
     this.writer.write(line.endsWith('\n') ? line : `${line}\n`).catch(() => {});
-    if (!line.startsWith('SP ')) this.app.monitor?.(line.trim(), 'tx');
+    if (!line.startsWith('SP ') && !line.startsWith('MC ')) this.app.monitor?.(line.trim(), 'tx');
     return true;
   }
 
@@ -102,11 +103,26 @@ export class RobotLink {
     }
   }
 
-  /** Envoie la consigne courante du simulateur (jumeau numérique). */
+  /**
+   * Envoie la consigne courante du simulateur (jumeau numérique), horodatée : le firmware
+   * l’interpole selon ces instants (tampon de lissage), quelle que soit la gigue d’envoi.
+   * Pont MIT : la consigne inclut le couple d’anticipation (compensation de gravité).
+   */
   tick() {
     if (!this.connected || !this.streaming) return;
-    const d = this.app.sim.des;
-    this.send(streamSetpoint(this.seq++, d.q.map((v) => +(v * R2D).toFixed(4)), d.qd.map((v) => +(v * R2D).toFixed(3))));
+    const sim = this.app.sim, d = sim.des;
+    const t = performance.now();
+    const q = d.q.map((v) => +(v * R2D).toFixed(4));
+    const v = d.qd.map((x) => +(x * R2D).toFixed(3));
+    if (this.app.params.hardware.controller === 'mit_can_bridge') {
+      const ff = sim.ctrlOut?.ff || new Array(q.length).fill(0);
+      this.send(mitSetpoint(this.seq++, t, q, v, ff.map((x) => +x.toFixed(3))));
+    } else {
+      this.send(streamSetpoint(this.seq++, t, q, v));
+    }
+    // Pince : envoi seulement quand la consigne change
+    const g = sim.gripper, pct = Math.round((g.target / this.app.params.gripper.strokeMax) * 100);
+    if (pct !== this.lastGrip) { this.lastGrip = pct; this.cmd('GRIP', [pct]); }
   }
 
   sendConfig() {
@@ -147,7 +163,8 @@ export class RobotPanel {
       h('div.row',
         btn('Activer', () => L.cmd('EN', [1]), { cls: 'btn--sm' }),
         btn('Désactiver', () => L.cmd('EN', [0]), { cls: 'btn--sm' }),
-        btn('Prise d’origine', () => L.cmd('HOME'), { cls: 'btn--sm' }),
+        btn('Référencer', () => L.cmd(this.app.params.hardware.controller === 'mit_can_bridge' ? 'ZERO' : 'HOME'), { cls: 'btn--sm', title: 'Pas-à-pas : prise d’origine sur capteurs (HOME). Pont MIT : la pose actuelle devient la pose de repos (ZERO, puis SAVE).' }),
+        btn('Synchroniser', () => this.syncSim(), { cls: 'btn--sm', title: 'Place le simulateur sur la position mesurée du robot réel (avant d’activer le jumeau numérique)' }),
         btn('Stop', () => L.cmd('STOP'), { cls: 'btn--sm btn--danger' }),
         btn('Acquitter', () => L.cmd('CLR'), { cls: 'btn--sm' }),
         btn('Envoyer la config', () => L.sendConfig(), { cls: 'btn--sm', title: 'Envoie les paramètres (pas/°, butées, vitesses, prise d’origine) puis SAVE' }))));
@@ -161,6 +178,13 @@ export class RobotPanel {
       h('p.sect__note', `Consignes MIT (p*, v*, Kp, Kd, τff) de la consigne courante, encodées sur 8 octets pour chaque moteur (ID CAN). Activation : ${hex(MIT_FRAMES.enable)} · zéro : ${hex(MIT_FRAMES.setZero)}.`),
       this.mitBox));
     this.update();
+  }
+
+  syncSim() {
+    const st = this.link.status;
+    if (!st) { toast('Aucune position reçue du robot (connecter, puis attendre les trames ST)'); return; }
+    this.app.sim.reset(st.q.map((d) => d / R2D));
+    toast('Simulateur aligné sur la position mesurée');
   }
 
   update() {

@@ -26,15 +26,25 @@ function fmtNum(v) {
   return (Math.round(v * 10000) / 10000).toString();
 }
 
-/** Consigne articulaire en flux continu (degrés, vitesses optionnelles en °/s). */
-export const streamSetpoint = (seq, qDeg, vDeg = null) =>
-  encodeCommand('SP', [seq & 0xffff, ...qDeg, ...(vDeg ? vDeg : [])], true);
+/**
+ * Consigne articulaire en flux continu : SP seq t_ms q1..qn [v1..vn]
+ *   seq  : numéro de séquence (16 bits, reboucle)
+ *   tMs  : horodatage de l’émetteur en ms (16 bits, reboucle) — le firmware interpole
+ *          entre consignes selon ces instants, indépendamment de la gigue USB
+ *   qDeg : positions (°), vDeg : vitesses (°/s, optionnelles → interpolation d’Hermite)
+ */
+export const streamSetpoint = (seq, tMs, qDeg, vDeg = null) =>
+  encodeCommand('SP', [seq & 0xffff, Math.round(tMs) & 0xffff, ...qDeg, ...(vDeg ? vDeg : [])], true);
+
+/** Consigne du pont CAN mode MIT : MC seq t_ms q1..qn [v1..vn [τ1..τn]] (°, °/s, N·m). */
+export const mitSetpoint = (seq, tMs, qDeg, vDeg = null, tau = null) =>
+  encodeCommand('MC', [seq & 0xffff, Math.round(tMs) & 0xffff, ...qDeg, ...(vDeg ? vDeg : []), ...(vDeg && tau ? tau : [])], true);
 
 export const moveJointsCmd = (durationS, qDeg) => encodeCommand('MJ', [durationS, ...qDeg], true);
 
-export const STATES = ['IDLE', 'READY', 'HOMING', 'RUN', 'HOLD', 'FAULT', 'ESTOP'];
+export const STATES = ['IDLE', 'READY', 'HOMING', 'RUN', 'HOLD', 'DAMP', 'FAULT', 'ESTOP'];
 export const FLAG_BITS = {
-  enabled: 0x01, homed: 0x02, moving: 0x04, fault: 0x08, estopInput: 0x10, watchdog: 0x20, limit: 0x40, underrun: 0x80,
+  enabled: 0x01, homed: 0x02, moving: 0x04, fault: 0x08, estopInput: 0x10, watchdog: 0x20, limit: 0x40, underrun: 0x80, limited: 0x100,
 };
 
 /**

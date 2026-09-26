@@ -327,7 +327,11 @@ export const SCHEMA = [
       num('hardware.dirSetup', 'Délai DIR → STEP', 'timeUs', { min: 0, max: 1e-4, step: 1e-7, help: 'Temps d’établissement de la direction avant l’impulsion (DM542T : ≥ 5 µs).' }),
       bool('hardware.enableActiveLow', 'ENABLE actif à l’état bas', { help: 'Dépend du câblage des drivers (optocoupleurs DM542T : ENA+ au 5 V, ENA− piloté).' }),
       num('hardware.streamHz', 'Fréquence de flux USB', 'frequency', { min: 10, max: 1000, step: 10, help: 'Fréquence d’envoi des consignes articulaires en mode jumeau numérique (streaming).' }),
+      num('hardware.streamDelay', 'Lissage du flux (retard)', 'timeMs', { min: 0, max: 0.4, step: 0.005, help: 'Avance du tampon d’interpolation du firmware : absorbe la gigue USB/navigateur. Plus grand = plus lisse mais plus de retard (40 ms conseillé).' }),
       num('hardware.canBitrate', 'Débit CAN', 'bitrate', { min: 125000, max: 1000000, step: 125000, help: 'Débit du bus CAN (mode MIT) — 1 Mbit/s en standard.' }),
+      num('hardware.mitCtrlHz', 'Fréquence de commande CAN (MIT)', 'frequency', { min: 50, max: 1000, step: 50, help: 'Trames MIT envoyées par moteur et par seconde. Chaque trame reçoit une réponse : 6 moteurs à 400 Hz ≈ 60 % d’un bus à 1 Mbit/s.' }),
+      num('hardware.feedbackTimeout', 'Délai max. sans retour CAN', 'timeMs', { min: 0.01, max: 1, step: 0.005, help: 'Au-delà, le pont passe en défaut et amortit tous les axes.' }),
+      num('hardware.maxMotorTemp', 'Température moteur max.', 'none', { min: 40, max: 120, step: 1, help: '°C (MOSFET ou bobinage) avant mise en défaut.' }),
       table('hardware.pins', 'Brochage Teensy', [
         colInt('step', 'STEP', { min: 0, max: 54 }),
         colInt('dir', 'DIR', { min: 0, max: 54 }),

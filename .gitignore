@@ -4,3 +4,5 @@ node_modules/
 /firmware/test/build/
 /firmware/**/.pio/
 /tmp/
+/firmware/.deps/
+/firmware/.build/

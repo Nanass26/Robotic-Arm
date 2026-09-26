@@ -157,7 +157,7 @@ export function buildOrion6(p, opts = {}) {
     const s = specs[k];
     const bore = kit.cyl(d.ringBack + 1, d.housingR + 0.3).translate([0, 0, -1]);
     // Dégagement du moteur (passe par l’alésage lors du montage)
-    const motor = kit.cyl(d.motorLen + 12, (d.mot.size / 2) * Math.SQRT2 + 1.5).translate([0, 0, -d.motorLen - 11]);
+    const motor = kit.cyl(d.motorLen + 2.5, (d.mot.size / 2) * Math.SQRT2 + 1.5).translate([0, 0, -d.motorLen - 1.5]);
     const inserts = kit.polar(s.ring.n, (a) => kit.onCircle(kit.insert(s.ring.size, depth), d.ringBoltR, a, d.ringBack - depth + 0.01), placement[k].ringPhase);
     return world(k, kit.union([bore, motor, inserts]));
   };
