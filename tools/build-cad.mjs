@@ -143,6 +143,7 @@ for (const it of interferences.slice(0, 40)) console.log(`  ⚠ ${it.a} ∩ ${it
 
 // ------------------------------------------------------------------ balayage des articulations
 let sweep = null;
+let sweepMs = 0;
 if (!FAST) {
   const tS = Date.now();
   const kin = new Kinematics(params);
@@ -209,8 +210,9 @@ if (!FAST) {
     const tbl = res.tablePos !== null || res.tableNeg !== null ? `  [pince vers le bas : table à ${res.tableNeg ?? '—'}° / +${res.tablePos ?? '—'}°]` : '';
     console.log(`  J${j} : ${res.neg}° … +${res.pos}°  ${res.negBy || res.posBy ? `(contacts : ${res.negBy || '-'} / ${res.posBy || '-'})` : ''}${tbl}`);
   }
-  sweep = { limits, ms: Date.now() - tS };
-  console.log(`Balayage des articulations en ${(sweep.ms / 1000).toFixed(1)} s`);
+  sweep = { limits };
+  sweepMs = Date.now() - tS;
+  console.log(`Balayage des articulations en ${(sweepMs / 1000).toFixed(1)} s`);
 }
 
 // ------------------------------------------------------------------ fichiers générés

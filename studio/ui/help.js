@@ -36,7 +36,7 @@ const HTML = `
   <li>Lancez « Test de répétabilité » et surveillez les pas perdus et l’erreur de suivi (onglet Courbes).</li>
 </ol>
 <h3>Robot réel</h3>
-<p>Onglet <b>Robot</b> : connexion USB à la Teensy 4.1 (Chrome/Edge sur ordinateur), envoi de la configuration, prise d’origine, puis <i>Jumeau numérique</i> : le vrai bras suit la simulation. Voir <code>docs/</code> dans le dépôt pour l’assemblage, le câblage et le protocole.</p>
+<p>Onglet <b>Robot réel</b> (Chrome/Edge sur ordinateur) : <i>Connecter (USB)</i> → <i>Envoyer la config</i> → <i>Activer</i> → <i>Référencer</i> (prise d’origine sur capteurs, ou pose de repos pour le pont MIT) → <i>Synchroniser</i> → <i>Jumeau numérique</i> : le vrai bras suit la simulation (consignes horodatées, lissées par le firmware ; compensation de gravité transmise au pont MIT). Le dossier <code>docs/</code> du dépôt détaille l’impression, l’assemblage, le câblage, la calibration et le protocole.</p>
 <h3>Fichiers exportables</h3>
 <p>Paramètres → <code>JSON</code> (configuration complète), <code>URDF</code> (ROS / MoveIt), <code>MJCF</code> (MuJoCo), <code>Firmware .h</code> (compilation Teensy) et <code>SET</code> (réglage série sans recompiler). Courbes → <code>CSV</code>. Pièces → <code>STL</code>.</p>
 `;

@@ -71,7 +71,7 @@ Pour piloter le **robot réel**, flashez la Teensy avec `firmware/bin/orion_fw-t
 | Commande | Teensy 4.1, drivers DM542T (ou TMC), génération de pas à 100 kHz, capteurs à effet Hall |
 | Pince | parallèle à crémaillère, course 50 mm, servo MG996R, patins TPU |
 | Impression | 37 STL, 58 pièces, ≈ 2,2 kg de PETG, plateau 220 × 220 × 250 mm |
-| Coût matériel | ≈ 576 € ([nomenclature](docs/08-nomenclature.md)) |
+| Coût matériel | ≈ 581 € ([nomenclature](docs/08-nomenclature.md)) |
 
 La variante **ORION-6 PRO** remplace les pas-à-pas par des moteurs QDD **DM4340** (J1–J3) et **DM4310** (J4–J6). Elle est
 commandée en **mode MIT** sur bus CAN : τ = Kp·(p* − p) + Kd·(v* − v) + τff, avec compensation de gravité, dans l’esprit

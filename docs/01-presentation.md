@@ -43,7 +43,7 @@ La **portée horizontale** au point outil est de 593 mm.
 - Commande **en boucle ouverte**, comme la plupart des bras imprimés. La précision repose sur un dimensionnement avec
   marge (onglet *Analyse*) et sur des profils de vitesse à jerk limité. Le simulateur d’ORION Studio **reproduit la perte
   de pas** : il signale un réglage trop agressif avant qu’il ne cause un décrochage sur le vrai bras.
-- Budget d’environ 576 € ([nomenclature](08-nomenclature.md)).
+- Budget d’environ 581 € ([nomenclature](08-nomenclature.md)).
 
 ### ORION-6 PRO : moteurs QDD en mode MIT (CAN)
 
@@ -111,5 +111,7 @@ du robot réel : il envoie ses consignes en temps réel par USB.
   firmware. Voir [9. Électronique](09-electronique.md).
 - Moteurs coupés (ou arrêt d’urgence), un bras à pas-à-pas **peut retomber** sous son propre poids. Les réducteurs
   cycloïdaux sont partiellement réversibles. Soutenez le bras avant de couper les moteurs.
-- Les capteurs de fin de course sont câblés **en logique de sécurité** (contact NF, un fil coupé déclenche) et les
+- La prise d’origine utilise des capteurs à effet Hall. Un capteur absent ou débranché est détecté : la course de
+  recherche est dépassée et le firmware passe en défaut. Pour détecter aussi un fil coupé en fonctionnement, utilisez
+  des interrupteurs mécaniques à contact NF en logique active haute (voir [9. Électronique](09-electronique.md)). Les
   butées logicielles sont placées en deçà des butées mécaniques.
