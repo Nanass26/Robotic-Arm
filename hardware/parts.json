@@ -1,0 +1,871 @@
+{
+  "layout": {
+    "d1": 160,
+    "a2": 240,
+    "d4": 220,
+    "d6": 33.19999999999999,
+    "tcp": 100.3,
+    "zBT": 85.7,
+    "zI1": 98.2,
+    "yU": 55.5,
+    "y3I": 43,
+    "yT": 43,
+    "y5I": 55,
+    "xe4": 60,
+    "xW": 220,
+    "xFlange": 253.2,
+    "sweepR": 56.795352959154386
+  },
+  "parts": [
+    {
+      "file": "CY-M_housing",
+      "name": "Carter",
+      "group": "Module CY-M",
+      "qty": 2,
+      "size": [
+        100,
+        100,
+        33.7
+      ],
+      "massG": 60.594406353443205,
+      "fill": 0.6,
+      "material": "PETG",
+      "note": "Imprimer fond sur le plateau, sans supports (les gorges sont verticales)."
+    },
+    {
+      "file": "CY-M_retainer",
+      "name": "Couvercle",
+      "group": "Module CY-M",
+      "qty": 2,
+      "size": [
+        100,
+        100,
+        3
+      ],
+      "massG": 11.973788201738628,
+      "fill": 0.8,
+      "material": "PETG",
+      "note": "Maintient la bague extérieure du roulement principal ; serré par les boulons de fixation du module."
+    },
+    {
+      "file": "CY-M_cam",
+      "name": "Came excentrique",
+      "group": "Module CY-M",
+      "qty": 2,
+      "size": [
+        18.8,
+        17,
+        25.400000000000002
+      ],
+      "massG": 4.946188436064622,
+      "fill": 1,
+      "material": "PETG",
+      "note": "Remplissage 100 %. Excentricité 0.9 mm. Emmanchée sur l’arbre moteur (méplat), goutte de colle frein."
+    },
+    {
+      "file": "CY-M_discA",
+      "name": "Disque cycloïdal A",
+      "group": "Module CY-M",
+      "qty": 2,
+      "size": [
+        61.578295931220055,
+        61.68905308842659,
+        7
+      ],
+      "massG": 18.444902198662646,
+      "fill": 1,
+      "material": "PETG",
+      "note": "25 lobes. Remplissage 100 %, 4 périmètres, couche 0,12–0,16 mm pour le profil."
+    },
+    {
+      "file": "CY-M_discB",
+      "name": "Disque cycloïdal B",
+      "group": "Module CY-M",
+      "qty": 2,
+      "size": [
+        61.578295939242125,
+        61.68905309221749,
+        7.000000000000002
+      ],
+      "massG": 18.444902198663648,
+      "fill": 1,
+      "material": "PETG",
+      "note": "Identique au disque A mais décalé d’un demi-lobe (7.20°) : repérer « B »."
+    },
+    {
+      "file": "CY-M_flange",
+      "name": "Flasque de sortie",
+      "group": "Module CY-M",
+      "qty": 2,
+      "size": [
+        58,
+        58,
+        15.5
+      ],
+      "massG": 38.847120195536476,
+      "fill": 0.9,
+      "material": "PETG",
+      "note": "Imprimer face avant sur le plateau. 6 inserts M3 ; 6 doigts Ø4 emmanchés."
+    },
+    {
+      "file": "CY-M_clamp",
+      "name": "Bague de sortie",
+      "group": "Module CY-M",
+      "qty": 2,
+      "size": [
+        62.5,
+        62.5,
+        7.5
+      ],
+      "massG": 13.08445354822519,
+      "fill": 0.9,
+      "material": "PETG",
+      "note": "Face d’interface du segment suivant. Serre la bague intérieure du roulement."
+    },
+    {
+      "file": "CY-L_housing",
+      "name": "Carter",
+      "group": "Module CY-L",
+      "qty": 1,
+      "size": [
+        118,
+        118,
+        38.7
+      ],
+      "massG": 95.0026418522076,
+      "fill": 0.6,
+      "material": "PETG",
+      "note": "Imprimer fond sur le plateau, sans supports (les gorges sont verticales)."
+    },
+    {
+      "file": "CY-L_retainer",
+      "name": "Couvercle",
+      "group": "Module CY-L",
+      "qty": 1,
+      "size": [
+        118,
+        118,
+        3
+      ],
+      "massG": 14.581594811211113,
+      "fill": 0.8,
+      "material": "PETG",
+      "note": "Maintient la bague extérieure du roulement principal ; serré par les boulons de fixation du module."
+    },
+    {
+      "file": "CY-L_cam",
+      "name": "Came excentrique",
+      "group": "Module CY-L",
+      "qty": 1,
+      "size": [
+        22,
+        20,
+        29.400000000000002
+      ],
+      "massG": 7.589775231357822,
+      "fill": 1,
+      "material": "PETG",
+      "note": "Remplissage 100 %. Excentricité 1 mm. Emmanchée sur l’arbre moteur (méplat), goutte de colle frein."
+    },
+    {
+      "file": "CY-L_discA",
+      "name": "Disque cycloïdal A",
+      "group": "Module CY-L",
+      "qty": 1,
+      "size": [
+        76.60509695112705,
+        77,
+        8.000000000000002
+      ],
+      "massG": 32.44407198163235,
+      "fill": 1,
+      "material": "PETG",
+      "note": "30 lobes. Remplissage 100 %, 4 périmètres, couche 0,12–0,16 mm pour le profil."
+    },
+    {
+      "file": "CY-L_discB",
+      "name": "Disque cycloïdal B",
+      "group": "Module CY-L",
+      "qty": 1,
+      "size": [
+        77.00000000274055,
+        76.60509694863975,
+        8
+      ],
+      "massG": 32.444078933911484,
+      "fill": 1,
+      "material": "PETG",
+      "note": "Identique au disque A mais décalé d’un demi-lobe (6.00°) : repérer « B »."
+    },
+    {
+      "file": "CY-L_flange",
+      "name": "Flasque de sortie",
+      "group": "Module CY-L",
+      "qty": 1,
+      "size": [
+        73,
+        73,
+        16.5
+      ],
+      "massG": 67.75920812204903,
+      "fill": 0.9,
+      "material": "PETG",
+      "note": "Imprimer face avant sur le plateau. 6 inserts M4 ; 8 doigts Ø5 emmanchés."
+    },
+    {
+      "file": "CY-L_clamp",
+      "name": "Bague de sortie",
+      "group": "Module CY-L",
+      "qty": 1,
+      "size": [
+        78,
+        78,
+        7.5
+      ],
+      "massG": 19.82241634795846,
+      "fill": 0.9,
+      "material": "PETG",
+      "note": "Face d’interface du segment suivant. Serre la bague intérieure du roulement."
+    },
+    {
+      "file": "CY-S_housing",
+      "name": "Carter",
+      "group": "Module CY-S",
+      "qty": 3,
+      "size": [
+        91,
+        91,
+        30.700000000000003
+      ],
+      "massG": 52.38522239457113,
+      "fill": 0.6,
+      "material": "PETG",
+      "note": "Imprimer fond sur le plateau, sans supports (les gorges sont verticales)."
+    },
+    {
+      "file": "CY-S_retainer",
+      "name": "Couvercle",
+      "group": "Module CY-S",
+      "qty": 3,
+      "size": [
+        91,
+        91,
+        3
+      ],
+      "massG": 10.207863397943264,
+      "fill": 0.8,
+      "material": "PETG",
+      "note": "Maintient la bague extérieure du roulement principal ; serré par les boulons de fixation du module."
+    },
+    {
+      "file": "CY-S_cam",
+      "name": "Came excentrique",
+      "group": "Module CY-S",
+      "qty": 3,
+      "size": [
+        16.6,
+        15,
+        24.400000000000002
+      ],
+      "massG": 3.533727070560207,
+      "fill": 1,
+      "material": "PETG",
+      "note": "Remplissage 100 %. Excentricité 0.8 mm. Emmanchée sur l’arbre moteur (méplat), goutte de colle frein."
+    },
+    {
+      "file": "CY-S_discA",
+      "name": "Disque cycloïdal A",
+      "group": "Module CY-S",
+      "qty": 3,
+      "size": [
+        53.020211547613144,
+        53.020211547613144,
+        6
+      ],
+      "massG": 11.617362563340084,
+      "fill": 1,
+      "material": "PETG",
+      "note": "20 lobes. Remplissage 100 %, 4 périmètres, couche 0,12–0,16 mm pour le profil."
+    },
+    {
+      "file": "CY-S_discB",
+      "name": "Disque cycloïdal B",
+      "group": "Module CY-S",
+      "qty": 3,
+      "size": [
+        53.59999999574254,
+        53.59999999574254,
+        6.000000000000002
+      ],
+      "massG": 11.617362688342672,
+      "fill": 1,
+      "material": "PETG",
+      "note": "Identique au disque A mais décalé d’un demi-lobe (9.00°) : repérer « B »."
+    },
+    {
+      "file": "CY-S_flange",
+      "name": "Flasque de sortie",
+      "group": "Module CY-S",
+      "qty": 3,
+      "size": [
+        53,
+        53,
+        13.5
+      ],
+      "massG": 27.709891054399424,
+      "fill": 0.9,
+      "material": "PETG",
+      "note": "Imprimer face avant sur le plateau. 6 inserts M3 ; 6 doigts Ø3 emmanchés."
+    },
+    {
+      "file": "CY-S_clamp",
+      "name": "Bague de sortie",
+      "group": "Module CY-S",
+      "qty": 3,
+      "size": [
+        56.5,
+        56.5,
+        7.5
+      ],
+      "massG": 10.481904563337858,
+      "fill": 0.9,
+      "material": "PETG",
+      "note": "Face d’interface du segment suivant. Serre la bague intérieure du roulement."
+    },
+    {
+      "file": "base-plate",
+      "name": "Plaque de base",
+      "group": "Socle",
+      "qty": 1,
+      "size": [
+        200,
+        200,
+        6
+      ],
+      "massG": 104.0561247272037,
+      "fill": 0.5,
+      "material": "PETG",
+      "note": "Fixation à la table par 4 vis M6 (lumières Ø6,8). Ouverture pour le passage des câbles."
+    },
+    {
+      "file": "socle",
+      "name": "Socle (fût)",
+      "group": "Socle",
+      "qty": 1,
+      "size": [
+        116,
+        116,
+        79.7
+      ],
+      "massG": 85.3712333081753,
+      "fill": 0.4,
+      "material": "PETG",
+      "note": "Porte le module J1. Inserts M4 sur la face supérieure et le pied."
+    },
+    {
+      "file": "turret",
+      "name": "Tourelle (tambour d’épaule)",
+      "group": "Tourelle",
+      "qty": 1,
+      "size": [
+        120,
+        121.8,
+        117.7
+      ],
+      "massG": 262.6299936485316,
+      "fill": 0.45,
+      "material": "PETG",
+      "note": "Tambour horizontal qui reçoit le module J2 (moteur NEMA23 dans l’alésage). Imprimer collerette sur le plateau (alésage vertical), supports sous le pied."
+    },
+    {
+      "file": "upperarm-low",
+      "name": "Raccord bas du bras",
+      "group": "Bras supérieur",
+      "qty": 1,
+      "size": [
+        86,
+        143,
+        53.5
+      ],
+      "massG": 140.86683472239676,
+      "fill": 0.6,
+      "material": "PETG",
+      "note": "Vissé sur la sortie de J2 ; serre le tube Ø40 (vis M4 + écrou)."
+    },
+    {
+      "file": "upperarm-high",
+      "name": "Raccord haut du bras (porte J3)",
+      "group": "Bras supérieur",
+      "qty": 1,
+      "size": [
+        110,
+        146,
+        53.5
+      ],
+      "massG": 108.49218926004325,
+      "fill": 0.6,
+      "material": "PETG",
+      "note": "Reçoit le module J3 (moteur côté extérieur)."
+    },
+    {
+      "file": "elbow",
+      "name": "Bloc coude (porte J4)",
+      "group": "Coude",
+      "qty": 1,
+      "size": [
+        96.25,
+        86,
+        86
+      ],
+      "massG": 181.91401729959347,
+      "fill": 0.45,
+      "material": "PETG",
+      "note": "Vissé sur la sortie de J3 ; loge le moteur de J4."
+    },
+    {
+      "file": "forearm-adapter",
+      "name": "Adaptateur de tube (sortie J4)",
+      "group": "Avant-bras",
+      "qty": 1,
+      "size": [
+        62.5,
+        62.5,
+        29.599999999999994
+      ],
+      "massG": 28.17914649152771,
+      "fill": 0.6,
+      "material": "PETG",
+      "note": "Tube collé (époxy) + vis M3 traversante."
+    },
+    {
+      "file": "wrist",
+      "name": "Poignet (porte J5)",
+      "group": "Avant-bras",
+      "qty": 1,
+      "size": [
+        138.0953529591544,
+        101,
+        102
+      ],
+      "massG": 102.27218137878499,
+      "fill": 0.55,
+      "material": "PETG",
+      "note": "Reçoit le module J5 ; le moteur de J5 dépasse côté +y."
+    },
+    {
+      "file": "yoke",
+      "name": "Chape (J5 → J6)",
+      "group": "Poignet",
+      "qty": 1,
+      "size": [
+        93,
+        101.5,
+        64.5
+      ],
+      "massG": 43.183867507399555,
+      "fill": 0.7,
+      "material": "PETG",
+      "note": "Relie la sortie de J5 au carter de J6. Imprimer à plat, remplissage élevé."
+    },
+    {
+      "file": "gripper-body",
+      "name": "Corps de pince",
+      "group": "Pince",
+      "qty": 1,
+      "size": [
+        72,
+        56.5,
+        59
+      ],
+      "massG": 68.4424210509495,
+      "fill": 0.5,
+      "material": "PETG",
+      "note": "Vissé sur la bride J6 (6 × M3). Servo MG996R glissé par le dessous, fixé par 4 vis M2."
+    },
+    {
+      "file": "gripper-pinion",
+      "name": "Pignon m1 z20",
+      "group": "Pince",
+      "qty": 1,
+      "size": [
+        21.989026859402657,
+        21.989026859402657,
+        8
+      ],
+      "massG": 2.616547221143158,
+      "fill": 1,
+      "material": "PETG",
+      "note": "Vissé sur le palonnier rond du servo (4 vis M2). PETG 100 %."
+    },
+    {
+      "file": "gripper-finger-left",
+      "name": "Doigt gauche (crémaillère m1)",
+      "group": "Pince",
+      "qty": 1,
+      "size": [
+        59.69026042521,
+        69,
+        24.55
+      ],
+      "massG": 13.702637112060595,
+      "fill": 0.8,
+      "material": "PETG",
+      "note": "Crémaillère intégrée. Imprimer à plat, 100 % sur la denture conseillé."
+    },
+    {
+      "file": "gripper-pad-left",
+      "name": "Patin gauche (TPU)",
+      "group": "Pince",
+      "qty": 1,
+      "size": [
+        33,
+        16,
+        2
+      ],
+      "massG": 1.3094399999999953,
+      "fill": 1,
+      "material": "TPU",
+      "note": "TPU 95A, collé sur le doigt (adhérence)."
+    },
+    {
+      "file": "gripper-finger-right",
+      "name": "Doigt droit (crémaillère m1)",
+      "group": "Pince",
+      "qty": 1,
+      "size": [
+        61.27433388581011,
+        69,
+        24.55
+      ],
+      "massG": 13.777423189208978,
+      "fill": 0.8,
+      "material": "PETG",
+      "note": "Crémaillère intégrée. Imprimer à plat, 100 % sur la denture conseillé."
+    },
+    {
+      "file": "gripper-pad-right",
+      "name": "Patin droit (TPU)",
+      "group": "Pince",
+      "qty": 1,
+      "size": [
+        33,
+        16,
+        2
+      ],
+      "massG": 1.3094400000000002,
+      "fill": 1,
+      "material": "TPU",
+      "note": "TPU 95A, collé sur le doigt (adhérence)."
+    },
+    {
+      "file": "tolerance-test",
+      "name": "Test de tolérances",
+      "group": "Calibrage",
+      "qty": 1,
+      "size": [
+        110,
+        42,
+        6
+      ],
+      "massG": 28.53852907494081,
+      "fill": 1,
+      "material": "PETG",
+      "note": "À imprimer en premier : alésages de roulements (6802, 6810, 688), goupilles Ø3/4/5, inserts M3/M4, jeu d’emboîtement du tube."
+    }
+  ],
+  "interferences": [],
+  "sweep": {
+    "limits": [
+      {
+        "joint": 1,
+        "pos": 180,
+        "neg": -180,
+        "posBy": "",
+        "negBy": "",
+        "tablePos": null,
+        "tableNeg": null
+      },
+      {
+        "joint": 2,
+        "pos": 140,
+        "neg": -140,
+        "posBy": "0/2",
+        "negBy": "0/2",
+        "tablePos": 55,
+        "tableNeg": -115
+      },
+      {
+        "joint": 3,
+        "pos": 65,
+        "neg": -180,
+        "posBy": "1/5",
+        "negBy": "",
+        "tablePos": 35,
+        "tableNeg": null
+      },
+      {
+        "joint": 4,
+        "pos": 180,
+        "neg": -180,
+        "posBy": "",
+        "negBy": "",
+        "tablePos": null,
+        "tableNeg": null
+      },
+      {
+        "joint": 5,
+        "pos": 120,
+        "neg": -120,
+        "posBy": "4/6",
+        "negBy": "4/6",
+        "tablePos": null,
+        "tableNeg": null
+      },
+      {
+        "joint": 6,
+        "pos": 180,
+        "neg": -180,
+        "posBy": "",
+        "negBy": "",
+        "tablePos": null,
+        "tableNeg": null
+      }
+    ],
+    "ms": 13476
+  },
+  "bedIssues": [],
+  "massProperties": {
+    "maker": {
+      "source": "CAO (tools/build-cad.mjs)",
+      "flangeD6": 0.0332,
+      "tcpZ": 0.1003,
+      "links": [
+        {
+          "mass": 1.7892,
+          "com": [
+            0,
+            0.00418,
+            -0.010701
+          ],
+          "inertia": [
+            0.0033094,
+            0.0028828,
+            0.0022601,
+            -7.0076e-10,
+            4.6894e-7,
+            -0.00005854
+          ]
+        },
+        {
+          "mass": 1.1006,
+          "com": [
+            -0.064026,
+            -0.000001,
+            0.078511
+          ],
+          "inertia": [
+            0.0011158,
+            0.010984,
+            0.010629,
+            -3.1197e-8,
+            -0.0014783,
+            -1.8931e-7
+          ]
+        },
+        {
+          "mass": 0.7294,
+          "com": [
+            0,
+            -0.005855,
+            0.023396
+          ],
+          "inertia": [
+            0.00087994,
+            0.00070024,
+            0.00074511,
+            -6.9234e-10,
+            -1.1156e-7,
+            -0.00011072
+          ]
+        },
+        {
+          "mass": 0.7076,
+          "com": [
+            0,
+            -0.031158,
+            0.072992
+          ],
+          "inertia": [
+            0.0034486,
+            0.0015127,
+            0.0023151,
+            3.6788e-14,
+            -7.2486e-15,
+            -0.0013764
+          ]
+        },
+        {
+          "mass": 0.5196,
+          "com": [
+            0,
+            -0.008571,
+            -0.003928
+          ],
+          "inertia": [
+            0.00055387,
+            0.00033786,
+            0.00050445,
+            -9.559e-10,
+            -1.1006e-7,
+            0.000020539
+          ]
+        },
+        {
+          "mass": 0.0487,
+          "com": [
+            0,
+            0,
+            -0.00988
+          ],
+          "inertia": [
+            0.000010316,
+            0.000010316,
+            0.000016651,
+            1.9252e-19,
+            3.6922e-17,
+            -3.0065e-19
+          ]
+        }
+      ],
+      "tool": {
+        "mass": 0.1562,
+        "com": [
+          -0.001962,
+          -0.000006,
+          0.035264
+        ],
+        "inertiaDiag": [
+          0.00012576,
+          0.00017556,
+          0.000083388
+        ]
+      }
+    },
+    "pro": {
+      "source": "CAO structure + actionneurs QDD estimés",
+      "flangeD6": 0.0332,
+      "tcpZ": 0.1003,
+      "links": [
+        {
+          "mass": 0.6926,
+          "com": [
+            0,
+            0.027585,
+            -0.017219
+          ],
+          "inertia": [
+            0.0027173,
+            0.0011185,
+            0.0026979,
+            3.9986e-9,
+            6.3232e-10,
+            -0.00030749
+          ]
+        },
+        {
+          "mass": 0.7548,
+          "com": [
+            -0.098949,
+            -0.000001,
+            0.064776
+          ],
+          "inertia": [
+            0.0021808,
+            0.010183,
+            0.0087965,
+            -4.5213e-9,
+            -0.0027866,
+            2.3012e-8
+          ]
+        },
+        {
+          "mass": 0.5699,
+          "com": [
+            0,
+            -0.025645,
+            0.01334
+          ],
+          "inertia": [
+            0.0018087,
+            0.00072393,
+            0.0018152,
+            -3.5328e-9,
+            -9.1272e-10,
+            -0.00020577
+          ]
+        },
+        {
+          "mass": 0.5512,
+          "com": [
+            0,
+            -0.06965,
+            0.058194
+          ],
+          "inertia": [
+            0.0053896,
+            0.0018384,
+            0.004081,
+            8.6214e-9,
+            3.848e-9,
+            -0.002001
+          ]
+        },
+        {
+          "mass": 0.4132,
+          "com": [
+            0,
+            -0.034366,
+            -0.008786
+          ],
+          "inertia": [
+            0.0014282,
+            0.00047291,
+            0.001409,
+            -5.3698e-9,
+            1.1187e-9,
+            0.00012779
+          ]
+        },
+        {
+          "mass": 0.12,
+          "com": [
+            0.000001,
+            0,
+            -0.049149
+          ],
+          "inertia": [
+            0.000135,
+            0.000135,
+            0.000135,
+            0,
+            0,
+            5.0617e-37
+          ]
+        }
+      ],
+      "tool": {
+        "mass": 0.1562,
+        "com": [
+          -0.001962,
+          -0.000006,
+          0.035264
+        ],
+        "inertiaDiag": [
+          0.00012576,
+          0.00017556,
+          0.000083388
+        ]
+      }
+    }
+  }
+}

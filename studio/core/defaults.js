@@ -1,7 +1,7 @@
 // ORION-6 — Configurations par défaut et préréglages.
 // Toutes les valeurs sont en SI (m, rad, kg, s, N·m, A, V).
 
-import { MASS_PROPERTIES } from './generated/massprops.js';
+import { MASS_PROPERTIES, COLLISION_CAPSULES } from './generated/massprops.js';
 
 const DEG = Math.PI / 180;
 const J6 = (f) => Array.from({ length: 6 }, (_, i) => f(i));
@@ -87,10 +87,12 @@ export function makeOrion6Maker() {
       tool: { name: 'Pince parallèle', x: 0, y: 0, z: mp.tcpZ, roll: 0, pitch: 0, yaw: 0 },
     },
     limits: {
+      // Butées issues du balayage CAO (auto-collisions, autres axes à zéro) avec 5–10° de marge ;
+      // J1, J4, J6 : limitées par les câbles.
       joints: [
         { min: -170 * DEG, max: 170 * DEG, vmax: 120 * DEG, amax: 300 * DEG, jmax: 3000 * DEG },
-        { min: -95 * DEG, max: 95 * DEG, vmax: 90 * DEG, amax: 200 * DEG, jmax: 2000 * DEG },
-        { min: -140 * DEG, max: 70 * DEG, vmax: 110 * DEG, amax: 300 * DEG, jmax: 3000 * DEG },
+        { min: -130 * DEG, max: 130 * DEG, vmax: 90 * DEG, amax: 200 * DEG, jmax: 2000 * DEG },
+        { min: -170 * DEG, max: 60 * DEG, vmax: 110 * DEG, amax: 300 * DEG, jmax: 3000 * DEG },
         { min: -170 * DEG, max: 170 * DEG, vmax: 170 * DEG, amax: 600 * DEG, jmax: 6000 * DEG },
         { min: -115 * DEG, max: 115 * DEG, vmax: 170 * DEG, amax: 600 * DEG, jmax: 6000 * DEG },
         { min: -180 * DEG, max: 180 * DEG, vmax: 200 * DEG, amax: 700 * DEG, jmax: 7000 * DEG },
@@ -158,6 +160,7 @@ export function makeOrion6Maker() {
       selfCollision: true,
       floorCollision: true,
       capsuleMargin: 0.004,
+      capsules: deepClone(COLLISION_CAPSULES),
       reducedSpeed: 0.25,
       collabTcpSpeed: 0.25,
       watchdogMs: 250,
@@ -193,8 +196,8 @@ export function makeOrion6Maker() {
       gripperPin: 33,
       homing: [
         { enabled: true, direction: -1, speed: 20 * DEG, slowSpeed: 2 * DEG, backoff: 4 * DEG, switchPosition: -172 * DEG, order: 6 },
-        { enabled: true, direction: -1, speed: 15 * DEG, slowSpeed: 2 * DEG, backoff: 4 * DEG, switchPosition: -97 * DEG, order: 5 },
-        { enabled: true, direction: 1, speed: 15 * DEG, slowSpeed: 2 * DEG, backoff: 4 * DEG, switchPosition: 72 * DEG, order: 4 },
+        { enabled: true, direction: -1, speed: 15 * DEG, slowSpeed: 2 * DEG, backoff: 4 * DEG, switchPosition: -133 * DEG, order: 5 },
+        { enabled: true, direction: 1, speed: 15 * DEG, slowSpeed: 2 * DEG, backoff: 4 * DEG, switchPosition: 62 * DEG, order: 4 },
         { enabled: true, direction: -1, speed: 30 * DEG, slowSpeed: 3 * DEG, backoff: 5 * DEG, switchPosition: -172 * DEG, order: 3 },
         { enabled: true, direction: -1, speed: 30 * DEG, slowSpeed: 3 * DEG, backoff: 5 * DEG, switchPosition: -117 * DEG, order: 1 },
         { enabled: true, direction: -1, speed: 30 * DEG, slowSpeed: 3 * DEG, backoff: 5 * DEG, switchPosition: -182 * DEG, order: 2 },
@@ -202,7 +205,7 @@ export function makeOrion6Maker() {
     },
     poses: {
       home: [0, 0, 0, 0, 90 * DEG, 0],
-      rest: [0, -25 * DEG, 65 * DEG, 0, 50 * DEG, 0],
+      rest: [0, -10 * DEG, 55 * DEG, 0, 35 * DEG, 0],
       zero: [0, 0, 0, 0, 0, 0],
     },
   };

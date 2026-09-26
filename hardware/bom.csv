@@ -1,0 +1,106 @@
+Catégorie;Référence;Désignation;Quantité;Unité;Prix unitaire indicatif (€);Note
+Moteurs;NEMA17-48;Moteur pas-à-pas NEMA17 48 mm, 1,8°/pas (ex. 0.59 N·m);2;pce;14.00;
+Roulements;6811;Roulement à billes à section mince 6811 2RS;2;pce;8.00;
+Roulements;6803;Roulement à billes 6803 2RS (came);4;pce;1.60;
+Roulements;688;Roulement 688 2RS (8×16×5, support de came);6;pce;0.80;
+Goupilles;Ø4×20;Goupille cylindrique acier trempé ISO 8734 Ø4×20 mm;115;pce;0.08;
+Goupilles;Ø4×24;Goupille cylindrique acier trempé ISO 8734 Ø4×24 mm;12;pce;0.08;
+Moteurs;NEMA23-76;Moteur pas-à-pas NEMA23 76 mm, 1,8°/pas (ex. 1.89 N·m);1;pce;32.00;
+Roulements;6814;Roulement à billes à section mince 6814 2RS;1;pce;12.00;
+Roulements;6804;Roulement à billes 6804 2RS (came);2;pce;2.20;
+Goupilles;Ø5×24;Goupille cylindrique acier trempé ISO 8734 Ø5×24 mm;39;pce;0.12;
+Moteurs;NEMA17-40;Moteur pas-à-pas NEMA17 40 mm, 1,8°/pas (ex. 0.42 N·m);2;pce;12.00;
+Roulements;6810;Roulement à billes à section mince 6810 2RS;3;pce;6.00;
+Roulements;6802;Roulement à billes 6802 2RS (came);6;pce;1.50;
+Goupilles;Ø3×20;Goupille cylindrique acier trempé ISO 8734 Ø3×20 mm;18;pce;0.08;
+Moteurs;NEMA17-34;Moteur pas-à-pas NEMA17 34 mm, 1,8°/pas (ex. 0.28 N·m);1;pce;11.00;
+Structure;Tube Ø40×2 L=117;Tube rond aluminium 6060 Ø40×2 mm, à couper à 117 mm (ébavurer);1;pce;6.00;
+Structure;Tube Ø40×2 L=79;Tube rond aluminium 6060 Ø40×2 mm, à couper à 79 mm (ébavurer);1;pce;6.00;
+Pince;MG996R;Servomoteur MG996R (couple 9–11 kg·cm, pignons métal) + palonnier rond;1;pce;7.00;
+Visserie;M4×16 CHC;Vis CHC ISO 4762 M4×16 (fixation des modules);24;pce;0.08;
+Inserts;M4 insert;Insert fileté laiton à chaud M4 (L ≈ 6 mm);30;pce;0.10;
+Visserie;M3×16 CHC;Vis CHC ISO 4762 M3×16 (interfaces de sortie);48;pce;0.08;
+Inserts;M3 insert;Insert fileté laiton à chaud M3 (L ≈ 6 mm);48;pce;0.10;
+Visserie;M3×8 CHC;Vis CHC M3×8 (moteur NEMA17);20;pce;0.05;
+Visserie;M5×16 CHC;Vis CHC M5×16 + écrou M5 (moteur NEMA23);4;pce;0.12;
+Visserie;Écrou M5;Écrou hexagonal M5;4;pce;0.03;
+Visserie;M4×30 CHC;Vis CHC M4×30 + écrou (serrage des tubes);2;pce;0.10;
+Visserie;Écrou M4;Écrou hexagonal M4;2;pce;0.03;
+Visserie;M3×50 CHC;Vis M3×50 + écrou nylstop (goupillage du tube d’avant-bras);2;pce;0.15;
+Visserie;M4×12 CHC;Vis CHC M4×12 (plaque de base → socle);6;pce;0.06;
+Visserie;M3×12 CHC;Vis CHC M3×12 (pince → bride J6);6;pce;0.05;
+Visserie;M2×10;Vis M2×10 + écrou (servo de pince, pignon);8;pce;0.05;
+Visserie;M6 fixation;Vis M6 + rondelle (fixation à la table);4;pce;0.20;
+Consommables;Colle frein;Frein filet faible (bleu) + graisse PTFE pour réducteurs;1;lot;8.00;
+Consommables;Époxy;Colle époxy bi-composant (tubes, cames);1;lot;6.00;
+Électronique;Teensy 4.1;Microcontrôleur Teensy 4.1 (600 MHz, USB);1;pce;35.00;
+Électronique;DM542T;Driver pas-à-pas numérique DM542T (20–50 V, 1–4,2 A) — ou TMC5160 / DM320T pour les petits axes;6;pce;22.00;
+Électronique;Alim 36 V;Alimentation 36 V 10 A (ex. Mean Well LRS-350-36);1;pce;40.00;
+Électronique;Buck 6 V;Convertisseur abaisseur 36→6 V 5 A (servo de pince);1;pce;6.00;
+Électronique;Buck 5 V;Convertisseur 36→5 V 3 A (Teensy, capteurs);1;pce;4.00;
+Électronique;Capteur Hall;Capteur à effet Hall A3144 (ou NJK-5002C) + aimant néodyme 6×3 mm;6;pce;1.50;
+Électronique;Arrêt d’urgence;Bouton champignon 22 mm, 1 NF + 1 NO, à accrochage;1;pce;8.00;
+Électronique;Relais;Contacteur/relais 12–36 V 20 A (coupure puissance moteurs par l’AU);1;pce;10.00;
+Électronique;Câble 4G;Câble blindé 4×0,5 mm² (moteurs) — env. 8 m;8;m;1.20;
+Électronique;Câble 3G;Câble 3×0,25 mm² (capteurs, servo) — env. 8 m;8;m;0.60;
+Électronique;Connecteurs;Connecteurs GX16-4 (moteurs) + XT60 (puissance) + borniers;1;lot;18.00;
+Électronique;Fusible;Porte-fusible + fusible 10 A;1;pce;3.00;
+Pièces imprimées;J1-housing;Carter CY-M;1;pce;;PETG/PLA+ · remplissage 60 %
+Pièces imprimées;J1-retainer;Couvercle CY-M;1;pce;;PETG/PLA+ · remplissage 80 %
+Pièces imprimées;J1-cam;Came excentrique CY-M;1;pce;;PETG/PLA+ · remplissage 100 %
+Pièces imprimées;J1-discA;Disque cycloïdal A CY-M;1;pce;;PETG/PLA+ · remplissage 100 %
+Pièces imprimées;J1-discB;Disque cycloïdal B CY-M;1;pce;;PETG/PLA+ · remplissage 100 %
+Pièces imprimées;J1-flange;Flasque de sortie CY-M;1;pce;;PETG/PLA+ · remplissage 90 %
+Pièces imprimées;J1-clamp;Bague de sortie CY-M;1;pce;;PETG/PLA+ · remplissage 90 %
+Pièces imprimées;J2-housing;Carter CY-L;1;pce;;PETG/PLA+ · remplissage 60 %
+Pièces imprimées;J2-retainer;Couvercle CY-L;1;pce;;PETG/PLA+ · remplissage 80 %
+Pièces imprimées;J2-cam;Came excentrique CY-L;1;pce;;PETG/PLA+ · remplissage 100 %
+Pièces imprimées;J2-discA;Disque cycloïdal A CY-L;1;pce;;PETG/PLA+ · remplissage 100 %
+Pièces imprimées;J2-discB;Disque cycloïdal B CY-L;1;pce;;PETG/PLA+ · remplissage 100 %
+Pièces imprimées;J2-flange;Flasque de sortie CY-L;1;pce;;PETG/PLA+ · remplissage 90 %
+Pièces imprimées;J2-clamp;Bague de sortie CY-L;1;pce;;PETG/PLA+ · remplissage 90 %
+Pièces imprimées;J3-housing;Carter CY-M;1;pce;;PETG/PLA+ · remplissage 60 %
+Pièces imprimées;J3-retainer;Couvercle CY-M;1;pce;;PETG/PLA+ · remplissage 80 %
+Pièces imprimées;J3-cam;Came excentrique CY-M;1;pce;;PETG/PLA+ · remplissage 100 %
+Pièces imprimées;J3-discA;Disque cycloïdal A CY-M;1;pce;;PETG/PLA+ · remplissage 100 %
+Pièces imprimées;J3-discB;Disque cycloïdal B CY-M;1;pce;;PETG/PLA+ · remplissage 100 %
+Pièces imprimées;J3-flange;Flasque de sortie CY-M;1;pce;;PETG/PLA+ · remplissage 90 %
+Pièces imprimées;J3-clamp;Bague de sortie CY-M;1;pce;;PETG/PLA+ · remplissage 90 %
+Pièces imprimées;J4-housing;Carter CY-S;1;pce;;PETG/PLA+ · remplissage 60 %
+Pièces imprimées;J4-retainer;Couvercle CY-S;1;pce;;PETG/PLA+ · remplissage 80 %
+Pièces imprimées;J4-cam;Came excentrique CY-S;1;pce;;PETG/PLA+ · remplissage 100 %
+Pièces imprimées;J4-discA;Disque cycloïdal A CY-S;1;pce;;PETG/PLA+ · remplissage 100 %
+Pièces imprimées;J4-discB;Disque cycloïdal B CY-S;1;pce;;PETG/PLA+ · remplissage 100 %
+Pièces imprimées;J4-flange;Flasque de sortie CY-S;1;pce;;PETG/PLA+ · remplissage 90 %
+Pièces imprimées;J4-clamp;Bague de sortie CY-S;1;pce;;PETG/PLA+ · remplissage 90 %
+Pièces imprimées;J5-housing;Carter CY-S;1;pce;;PETG/PLA+ · remplissage 60 %
+Pièces imprimées;J5-retainer;Couvercle CY-S;1;pce;;PETG/PLA+ · remplissage 80 %
+Pièces imprimées;J5-cam;Came excentrique CY-S;1;pce;;PETG/PLA+ · remplissage 100 %
+Pièces imprimées;J5-discA;Disque cycloïdal A CY-S;1;pce;;PETG/PLA+ · remplissage 100 %
+Pièces imprimées;J5-discB;Disque cycloïdal B CY-S;1;pce;;PETG/PLA+ · remplissage 100 %
+Pièces imprimées;J5-flange;Flasque de sortie CY-S;1;pce;;PETG/PLA+ · remplissage 90 %
+Pièces imprimées;J5-clamp;Bague de sortie CY-S;1;pce;;PETG/PLA+ · remplissage 90 %
+Pièces imprimées;J6-housing;Carter CY-S;1;pce;;PETG/PLA+ · remplissage 60 %
+Pièces imprimées;J6-retainer;Couvercle CY-S;1;pce;;PETG/PLA+ · remplissage 80 %
+Pièces imprimées;J6-cam;Came excentrique CY-S;1;pce;;PETG/PLA+ · remplissage 100 %
+Pièces imprimées;J6-discA;Disque cycloïdal A CY-S;1;pce;;PETG/PLA+ · remplissage 100 %
+Pièces imprimées;J6-discB;Disque cycloïdal B CY-S;1;pce;;PETG/PLA+ · remplissage 100 %
+Pièces imprimées;J6-flange;Flasque de sortie CY-S;1;pce;;PETG/PLA+ · remplissage 90 %
+Pièces imprimées;J6-clamp;Bague de sortie CY-S;1;pce;;PETG/PLA+ · remplissage 90 %
+Pièces imprimées;base-plate;Plaque de base;1;pce;;PETG/PLA+ · remplissage 50 %
+Pièces imprimées;socle;Socle (fût);1;pce;;PETG/PLA+ · remplissage 40 %
+Pièces imprimées;turret;Tourelle (tambour d’épaule);1;pce;;PETG/PLA+ · remplissage 45 %
+Pièces imprimées;upperarm-low;Raccord bas du bras;1;pce;;PETG/PLA+ · remplissage 60 %
+Pièces imprimées;upperarm-high;Raccord haut du bras (porte J3);1;pce;;PETG/PLA+ · remplissage 60 %
+Pièces imprimées;elbow;Bloc coude (porte J4);1;pce;;PETG/PLA+ · remplissage 45 %
+Pièces imprimées;forearm-adapter;Adaptateur de tube (sortie J4);1;pce;;PETG/PLA+ · remplissage 60 %
+Pièces imprimées;wrist;Poignet (porte J5);1;pce;;PETG/PLA+ · remplissage 55 %
+Pièces imprimées;yoke;Chape (J5 → J6);1;pce;;PETG/PLA+ · remplissage 70 %
+Pièces imprimées;gripper-body;Corps de pince;1;pce;;PETG/PLA+ · remplissage 50 %
+Pièces imprimées;gripper-pinion;Pignon m1 z20;1;pce;;PETG/PLA+ · remplissage 100 %
+Pièces imprimées;gripper-finger-left;Doigt gauche (crémaillère m1);1;pce;;PETG/PLA+ · remplissage 80 %
+Pièces imprimées;gripper-pad-left;Patin gauche (TPU);1;pce;;TPU · remplissage 100 %
+Pièces imprimées;gripper-finger-right;Doigt droit (crémaillère m1);1;pce;;PETG/PLA+ · remplissage 80 %
+Pièces imprimées;gripper-pad-right;Patin droit (TPU);1;pce;;TPU · remplissage 100 %
+Pièces imprimées;tolerance-test;Test de tolérances;1;pce;;PETG/PLA+ · remplissage 100 %
+Consommables;Filament;Filament PETG ou PLA+ (≈ 2172 g de pièces + 25 % de marge/supports);2.8;kg;22.00;

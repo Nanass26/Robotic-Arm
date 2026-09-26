@@ -182,17 +182,21 @@ export class View3D {
   /** Remplace la géométrie procédurale par les maillages CAO (pièces imprimables). */
   useCad(cad) {
     if (!cad || !this.robot) return;
-    const keepGripper = this.robot.gripper.group;
+    const fingers = [];
     this.robot.links.forEach((g, i) => {
-      for (const c of [...g.children]) if (c !== keepGripper) g.remove(c);
+      for (const c of [...g.children]) g.remove(c);
       for (const part of cad.links[i] || []) {
         const m = new THREE.Mesh(part.geometry, part.material || this.mats.shell);
         m.userData.link = i;
         m.userData.part = part.id;
         m.castShadow = true; m.receiveShadow = true;
+        if (part.finger) fingers.push({ mesh: m, side: part.finger });
         g.add(m);
       }
     });
+    // Les doigts CAO sont modélisés pince ouverte : on les translate selon x de la bride.
+    const ref = cad.fingerRef;
+    this.robot.gripper = { update: (opening) => { for (const f of fingers) f.mesh.position.x = (f.side * (opening - ref)) / 2; } };
     this.robot.meshes = [];
     this.robot.root.traverse((o) => { if (o.isMesh) this.robot.meshes.push(o); });
     this.cadActive = true;

@@ -81,31 +81,42 @@ export class CollisionModel {
       // Outil : de la bride au TCP (repère n)
       this.toolCapsule = { link: kin.n, p0: [0, 0, 0.01], p1: [tool.x * 0.85, tool.y * 0.85, tool.z * 0.85], r: 0.025, tool: true };
     }
-    if (!set.explicit) this.autoIgnore(params);
+    this.autoIgnore(params);
   }
 
   /**
-   * Paires toujours en contact (géométrie DH simplifiée) : ignorées, comme le fait MoveIt
-   * pour les paires « Always/Default ». Critère : contact en pose zéro ou dans > 90 % des tirages.
+   * Paires de capsules toujours en contact (approximation de la géométrie) : ignorées
+   * individuellement, comme MoveIt le fait pour les paires « Adjacent/Always/Default ».
+   * Critère : contact dans la pose zéro (réputée sans collision, vérifiée sur la CAO)
+   * ou dans plus de 60 % des configurations tirées au hasard.
    */
-  autoIgnore(params, samples = 150) {
+  autoIgnore(params, samples = 120) {
+    this.ignoreCaps = new Set();
     const selfOn = this.selfOn;
     this.selfOn = true;
-    const counts = new Map();
-    const add = (res) => res.self.forEach((c) => {
-      const key = `${Math.min(c.a, c.b)}-${Math.max(c.a, c.b)}`;
-      counts.set(key, (counts.get(key) || 0) + 1);
-    });
-    const zero = this.check(new Array(this.kin.n).fill(0));
-    zero.self.forEach((c) => this.ignore.add(`${Math.min(c.a, c.b)}-${Math.max(c.a, c.b)}`));
+    const hits = new Map();
+    const collect = (q) => this.pairsInContact(q).forEach((k) => hits.set(k, (hits.get(k) || 0) + 1));
+    this.pairsInContact(new Array(this.kin.n).fill(0)).forEach((k) => this.ignoreCaps.add(k));
     let seed = 99;
     const rand = () => { seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
     const lim = params.limits.joints;
-    for (let k = 0; k < samples; k++) {
-      add(this.check(lim.map((l) => l.min + rand() * (l.max - l.min))));
-    }
-    for (const [key, c] of counts) if (c > 0.9 * samples) this.ignore.add(key);
+    for (let k = 0; k < samples; k++) collect(lim.map((l) => l.min + rand() * (l.max - l.min)));
+    for (const [k, c] of hits) if (c > 0.6 * samples) this.ignoreCaps.add(k);
     this.selfOn = selfOn;
+  }
+
+  pairsInContact(q) {
+    const caps = this.worldCapsules(q);
+    const out = [];
+    for (let i = 0; i < caps.length; i++) {
+      for (let j = i + 1; j < caps.length; j++) {
+        const A = caps[i], B = caps[j];
+        if (Math.abs(A.link - B.link) <= 1) continue;
+        const { dist } = segmentDistance(A.w0, A.w1, B.w0, B.w1);
+        if (dist - A.r - B.r < this.margin) out.push(`${i}-${j}`);
+      }
+    }
+    return out;
   }
 
   /** Capsules transformées dans le monde pour la configuration q. */
@@ -131,7 +142,7 @@ export class CollisionModel {
           const A = caps[i], B = caps[j];
           if (Math.abs(A.link - B.link) <= 1) continue;
           const key = `${Math.min(A.link, B.link)}-${Math.max(A.link, B.link)}`;
-          if (this.ignore.has(key)) continue;
+          if (this.ignore.has(key) || this.ignoreCaps?.has(`${i}-${j}`)) continue;
           const { dist } = segmentDistance(A.w0, A.w1, B.w0, B.w1);
           const clearance = dist - A.r - B.r;
           res.minDist = Math.min(res.minDist, clearance);

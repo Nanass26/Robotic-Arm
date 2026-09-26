@@ -13,6 +13,9 @@ import { AnalysisPanel } from './analysis.js';
 import { Plot, PLOT_MODES } from './plots.js';
 import { RobotLink, RobotPanel } from './serial.js';
 import { buildHelp } from './help.js';
+import { CadBridge } from './cad-bridge.js';
+import { PartsPanel } from './parts-panel.js';
+import { makeOrion6Maker } from '../core/defaults.js';
 import { h, btn, icon, toast, store, debounce, saveFile } from './dom.js';
 
 const R2D = 180 / Math.PI;
@@ -50,6 +53,10 @@ export class App {
     this.view = new View3D(this.viewport, this);
     this.view.buildRobot(this.sim.kin, this.params);
     this.buildPanels();
+    this.cad = new CadBridge(this);
+    this.rebuildCadSoon = debounce(() => this.rebuildCad(), 500);
+    this.onGeometryChanged = () => this.rebuildCadSoon();
+    this.initCad();
     this.bindKeys();
     this.observeTheme();
     this.sim.on('fault', (e) => { this.log(e.reason, 'error'); this.runner?.stop(); this.updateBanner(); });
@@ -222,8 +229,8 @@ export class App {
     this.assistant = new AssistantPanel(this.addPanel('left', 'assistant', 'Assistant IA'), this);
     this.paramsPanel = new ParamsPanel(this.addPanel('right', 'params', 'Paramètres'), this);
     this.analysis = new AnalysisPanel(this.addPanel('right', 'analysis', 'Analyse'), this);
-    this.partsHost = this.addPanel('right', 'parts', 'Pièces 3D');
-    this.partsHost.append(h('p.sect__note', 'Génération des pièces imprimables en cours…'));
+    this.partsPanel = new PartsPanel(this.addPanel('right', 'parts', 'Pièces 3D'), this);
+    this.partsPanel.build();
     buildHelp(this.addPanel('right', 'help', 'Aide'));
     // Courbes
     const plotHost = this.addPanel('bottom', 'plots', 'Courbes');
@@ -320,7 +327,42 @@ export class App {
 
   resetParams() { this.loadParams(defaultParams(), 'Paramètres réinitialisés (ORION-6 MAKER)'); }
 
-  cadForView() { return this.cad && this.cad.compatible(this.params) ? this.cad.viewData : null; }
+  cadForView() { return this.cad?.asm && this.cad.compatible(this.params) ? this.cad.viewData : null; }
+
+  defaultParamsForCad() { return makeOrion6Maker(); }
+
+  async initCad() {
+    try {
+      await this.cad.init();
+      this.rebuildCad();
+    } catch (e) {
+      this.log(`CAO indisponible (${e.message}) : affichage simplifié.`, 'warn');
+      this.cad.ready = false;
+      this.partsPanel.build();
+    }
+  }
+
+  /** Régénère les pièces imprimables et l’affichage réaliste depuis les paramètres courants. */
+  async rebuildCad() {
+    if (!this.cad?.ready) return;
+    if (!this.cad.compatible(this.params)) {
+      this.cad.asm = null;
+      this.view.buildRobot(this.sim.kin, this.params, null);
+      this.partsPanel.build();
+      return;
+    }
+    try {
+      await this.cad.buildFresh(this.params);
+      this.view.buildRobot(this.sim.kin, this.params, this.cad.viewData);
+      this.partsPanel.build();
+      this.log(`Pièces imprimables générées (${this.cad.asm.parts.filter((p) => p.printed).length} pièces, ${this.cad.buildMs.toFixed(0)} ms)`, 'ok');
+      for (const w of this.cad.asm.warnings) this.log(`CAO : ${w}`, 'warn');
+    } catch (e) {
+      this.log(`Erreur de génération CAO : ${e.message}`, 'error');
+      this.cad.asm = null;
+      this.view.buildRobot(this.sim.kin, this.params, null);
+    }
+  }
 
   // ------------------------------------------------------------------ commandes robot
   guard(fn) {
