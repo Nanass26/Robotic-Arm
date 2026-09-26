@@ -69,7 +69,7 @@ export function buildOrion6(p, opts = {}) {
   const specs = {
     1: { ...MODULE_SPECS.M, motorLen: 48 },
     2: { ...MODULE_SPECS.L, motorLen: 76 },
-    3: { ...MODULE_SPECS.M, motorLen: 48 },
+    3: { ...MODULE_SPECS.M, motorLen: 60 },
     4: { ...MODULE_SPECS.S, motorLen: 40 },
     5: { ...MODULE_SPECS.S, motorLen: 40 },
     6: { ...MODULE_SPECS.S, motorLen: 34 },

@@ -1,5 +1,5 @@
 Catégorie;Référence;Désignation;Quantité;Unité;Prix unitaire indicatif (€);Note
-Moteurs;NEMA17-48;Moteur pas-à-pas NEMA17 48 mm, 1,8°/pas (ex. 0.59 N·m);2;pce;14.00;
+Moteurs;NEMA17-48;Moteur pas-à-pas NEMA17 48 mm, 1,8°/pas (ex. 0.59 N·m);1;pce;14.00;
 Roulements;6811;Roulement à billes à section mince 6811 2RS;2;pce;8.00;
 Roulements;6803;Roulement à billes 6803 2RS (came);4;pce;1.60;
 Roulements;688;Roulement 688 2RS (8×16×5, support de came);6;pce;0.80;
@@ -9,6 +9,7 @@ Moteurs;NEMA23-76;Moteur pas-à-pas NEMA23 76 mm, 1,8°/pas (ex. 1.89 N·m);1;pc
 Roulements;6814;Roulement à billes à section mince 6814 2RS;1;pce;12.00;
 Roulements;6804;Roulement à billes 6804 2RS (came);2;pce;2.20;
 Goupilles;Ø5×24;Goupille cylindrique acier trempé ISO 8734 Ø5×24 mm;39;pce;0.12;
+Moteurs;NEMA17-60;Moteur pas-à-pas NEMA17 60 mm, 1,8°/pas (ex. 0.65 N·m);1;pce;17.00;
 Moteurs;NEMA17-40;Moteur pas-à-pas NEMA17 40 mm, 1,8°/pas (ex. 0.42 N·m);2;pce;12.00;
 Roulements;6810;Roulement à billes à section mince 6810 2RS;3;pce;6.00;
 Roulements;6802;Roulement à billes 6802 2RS (came);6;pce;1.50;
@@ -38,8 +39,9 @@ Consommables;Époxy;Colle époxy bi-composant (tubes, cames);1;lot;6.00;
 Électronique;Alim 36 V;Alimentation 36 V 10 A (ex. Mean Well LRS-350-36);1;pce;40.00;
 Électronique;Buck 6 V;Convertisseur abaisseur 36→6 V 5 A (servo de pince);1;pce;6.00;
 Électronique;Buck 5 V;Convertisseur 36→5 V 3 A (Teensy, capteurs);1;pce;4.00;
-Électronique;Capteur Hall;Capteur à effet Hall A3144 (ou NJK-5002C) + aimant néodyme 6×3 mm;6;pce;1.50;
-Électronique;Arrêt d’urgence;Bouton champignon 22 mm, 1 NF + 1 NO, à accrochage;1;pce;8.00;
+Électronique;Capteur Hall;Capteur à effet Hall A3144 (sortie à collecteur ouvert) + aimant néodyme 6×3 mm;6;pce;1.50;
+Électronique;Arrêt d’urgence;Bouton champignon 22 mm à accrochage, 2 contacts NF (contacteur + entrée Teensy);1;pce;10.00;
+Électronique;74HCT245;Tampon de niveaux 3,3 V → 5 V 74HCT245 (entrées optocouplées des drivers);2;pce;1.50;
 Électronique;Relais;Contacteur/relais 12–36 V 20 A (coupure puissance moteurs par l’AU);1;pce;10.00;
 Électronique;Câble 4G;Câble blindé 4×0,5 mm² (moteurs) — env. 8 m;8;m;1.20;
 Électronique;Câble 3G;Câble 3×0,25 mm² (capteurs, servo) — env. 8 m;8;m;0.60;

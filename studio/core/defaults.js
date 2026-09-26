@@ -31,7 +31,7 @@ export const QDD_LIBRARY = {
 const JOINT_NAMES = ['J1 Base', 'J2 Épaule', 'J3 Coude', 'J4 Avant-bras', 'J5 Poignet', 'J6 Bride'];
 
 // Réducteurs cycloïdaux imprimés : rapport = nombre de lobes = galets − 1.
-const MAKER_MOTORS = ['NEMA17-48', 'NEMA23-76', 'NEMA17-48', 'NEMA17-40', 'NEMA17-40', 'NEMA17-34'];
+const MAKER_MOTORS = ['NEMA17-48', 'NEMA23-76', 'NEMA17-60', 'NEMA17-40', 'NEMA17-40', 'NEMA17-34'];
 const MAKER_RATIOS = [25, 30, 25, 20, 20, 20];
 const MAKER_MODULES = ['CY-M', 'CY-L', 'CY-M', 'CY-S', 'CY-S', 'CY-S'];
 

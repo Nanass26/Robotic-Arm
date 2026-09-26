@@ -57,8 +57,9 @@ export function buildBOM(asm) {
   add('Électronique', 'Alim 36 V', 'Alimentation 36 V 10 A (ex. Mean Well LRS-350-36)', 1, 'pce', 40);
   add('Électronique', 'Buck 6 V', 'Convertisseur abaisseur 36→6 V 5 A (servo de pince)', 1, 'pce', 6);
   add('Électronique', 'Buck 5 V', 'Convertisseur 36→5 V 3 A (Teensy, capteurs)', 1, 'pce', 4);
-  add('Électronique', 'Capteur Hall', 'Capteur à effet Hall A3144 (ou NJK-5002C) + aimant néodyme 6×3 mm', 6, 'pce', 1.5);
-  add('Électronique', 'Arrêt d’urgence', 'Bouton champignon 22 mm, 1 NF + 1 NO, à accrochage', 1, 'pce', 8);
+  add('Électronique', 'Capteur Hall', 'Capteur à effet Hall A3144 (sortie à collecteur ouvert) + aimant néodyme 6×3 mm', 6, 'pce', 1.5);
+  add('Électronique', 'Arrêt d’urgence', 'Bouton champignon 22 mm à accrochage, 2 contacts NF (contacteur + entrée Teensy)', 1, 'pce', 10);
+  add('Électronique', '74HCT245', 'Tampon de niveaux 3,3 V → 5 V 74HCT245 (entrées optocouplées des drivers)', 2, 'pce', 1.5);
   add('Électronique', 'Relais', 'Contacteur/relais 12–36 V 20 A (coupure puissance moteurs par l’AU)', 1, 'pce', 10);
   add('Électronique', 'Câble 4G', 'Câble blindé 4×0,5 mm² (moteurs) — env. 8 m', 8, 'm', 1.2);
   add('Électronique', 'Câble 3G', 'Câble 3×0,25 mm² (capteurs, servo) — env. 8 m', 8, 'm', 0.6);

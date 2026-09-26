@@ -95,6 +95,8 @@ export class RobotLink {
     if (msg.type === 'st') {
       this.status = msg;
       if (this.mirror) this.app.showMeasured(msg.q.map((d) => d / R2D));
+      // Entrées TOR du robot réel → entrées du simulateur (ATTENDRE_ENTREE, panneau E/S)
+      if (Number.isFinite(msg.di)) for (let k = 0; k < 8; k++) this.app.sim.io.di[k] = (msg.di & (1 << k)) !== 0;
     } else {
       this.app.monitor?.(line, msg.type === 'err' ? 'error' : 'rx');
       if (msg.type === 'ok' && msg.args[0] === 'PONG') { this.version = msg.args.slice(1).join(' '); this.emit(); }
